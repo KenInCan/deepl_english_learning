@@ -1,12 +1,9 @@
-FROM node:lts
+FROM node:lts-alpine
 
-# amplify CLI
-RUN npm install -g @aws-amplify/cli
-
-ENV APP_DIR /app/
+ENV APP_DIR /app
 
 RUN mkdir -p /app
 WORKDIR $APP_DIR
-COPY package.json $APP_DIR/package.json
-RUN npm install
-COPY . $APP_DIR
+COPY package.json ./package.json
+RUN npm install -g npm && npm install
+COPY . .
